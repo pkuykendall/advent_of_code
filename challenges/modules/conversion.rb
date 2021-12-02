@@ -1,5 +1,6 @@
-module Conversion
+# frozen_string_literal: true
 
+module Conversion
   private
 
   def convert_to_int_array(input)

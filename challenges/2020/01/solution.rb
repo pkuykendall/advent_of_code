@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../modules/conversion.rb'
+require_relative '../../modules/conversion'
 
 module Year2020
   class Day01

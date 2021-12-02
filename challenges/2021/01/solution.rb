@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../modules/conversion.rb'
+require_relative '../../modules/conversion'
 module Year2021
   class Day01
     include Conversion
@@ -19,8 +19,7 @@ module Year2021
     private
 
     def count_of_increasing(numbers)
-      numbers.each_cons(2).select { |first, second| second > first }.count
+      numbers.each_cons(2).count { |first, second| second > first }
     end
-
   end
 end
