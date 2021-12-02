@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Year2020
   class Day03
     def part_1(input)
@@ -20,9 +21,9 @@ module Year2020
     private
 
     def count_trees_in_path(input, down:, right:)
-      lines = input.lines.select.with_index { |_, idx| idx % down == 0 }.map(&:strip)
+      lines = input.lines.select.with_index { |_, idx| (idx % down).zero? }.map(&:strip)
       lines.map.with_index.inject(0) do |count, (line, idx)|
-        position = (idx * right) % (line.length)
+        position = (idx * right) % line.length
         if line[position] == '#'
           count + 1
         else

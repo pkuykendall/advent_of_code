@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Year2020
   class Day02
     def part_1(input)
@@ -33,7 +34,7 @@ module Year2020
 
     def convert_policy_to_regex(policy)
       count, value = policy.split
-      Regexp.new(/^(?:[^#{value}]*#{value}[^#{value}]*){#{count.gsub('-', ',')}}$/)
+      Regexp.new(/^(?:[^#{value}]*#{value}[^#{value}]*){#{count.tr('-', ',')}}$/)
     end
   end
 end
