@@ -22,7 +22,7 @@ module Year2021
 
     def part_2(input)
       directions = input.lines.map.with_object(Hash.new(0)) do |line, state|
-        amount, direction = parse_line(line)
+        direction, amount = parse_line(line)
         case direction
         when 'forward'
           move_forward(amount, state)
@@ -47,7 +47,7 @@ module Year2021
     def parse_line(line)
       direction, amount = line.strip.split
       amount = amount.to_i
-      [amount, direction]
+      [direction, amount]
     end
 
     def direction_total(dir_str, directions)

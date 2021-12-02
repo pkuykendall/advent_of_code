@@ -1,6 +1,5 @@
 inherit_from: .rubocop_todo.yml
 
-
 Naming/HeredocDelimiterNaming:
   Exclude:
     - 'spec/**/solution_spec.rb'
