@@ -52,12 +52,12 @@ module Year2021
     end
 
     def build_sheet(sheet)
-      lines   = sheet.split("\n").map!(&:split)
-      columns = lines.transpose
-
-      OpenStruct.new(
-        lines: lines.map { |line| line.map!(&:to_i) },
-        columns: columns.map { |col| col.map!(&:to_i) }
+      lines     = sheet.split("\n").map!(&:split)
+      columns   = lines.transpose
+      new_sheet = Struct.new(:lines, :columns)
+      new_sheet.new(
+        lines.map { |line| line.map!(&:to_i) },
+        columns.map { |col| col.map!(&:to_i) }
       )
     end
   end

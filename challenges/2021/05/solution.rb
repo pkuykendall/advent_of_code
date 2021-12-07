@@ -58,7 +58,8 @@ module Year2021
       end
 
       def build_point(coord_array)
-        OpenStruct.new(x: coord_array[0], y: coord_array[1])
+        point = Struct.new(:x, :y)
+        point.new(*coord_array)
       end
 
       def increment_pointer(delta_x, delta_y, pointer)
@@ -109,12 +110,14 @@ module Year2021
       end
       parsed_lines.map do |line|
         point_1, point_2 = line.map(&method(:build_point))
-        build_line(point_1, point_2)
+        line             = build_line(point_1, point_2)
+        line
       end
     end
 
     def build_point(coord_array)
-      OpenStruct.new(x: coord_array[0], y: coord_array[1])
+      point = Struct.new(:x, :y)
+      point.new(*coord_array)
     end
 
     def populate_grid(line_segments, allow_diag: true)
@@ -140,11 +143,8 @@ module Year2021
 
     def build_line(point_1, point_2)
       delta = determine_delta(point_1, point_2)
-      OpenStruct.new(
-        start_point: point_1,
-        end_point: point_2,
-        delta: delta
-      )
+      line  = Struct.new(:start_point, :end_point, :delta)
+      line.new(point_1, point_2, delta)
     end
   end
 end
