@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require_relative '../../modules/array_operations'
 module Year2021
   class Day06
+    include ArrayOperations
+
     def part_1(input)
       population_after(80, parse_input(input))
     end
@@ -25,10 +28,6 @@ module Year2021
         generations.delete(-1)
       end.values
           .sum
-    end
-
-    def group_and_count(initial_fish)
-      initial_fish.uniq.map { |i| [i, initial_fish.count(i)] }.to_h
     end
   end
 end
