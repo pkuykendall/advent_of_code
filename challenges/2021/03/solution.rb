@@ -53,11 +53,12 @@ module Year2021
     end
 
     def options_for_gas_type(gas_type)
+      gas_type_option = Struct.new(:selector, :default)
       case gas_type
       when :oxygen
-        OpenStruct.new(selector: :max, default: '1')
+        gas_type_option.new(:max, '1')
       when :carbon_dioxide
-        OpenStruct.new(selector: :min, default: '0')
+        gas_type_option.new(:min, '0')
       end
     end
 
