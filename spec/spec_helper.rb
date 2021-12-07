@@ -5,5 +5,5 @@ Dir[File.join(File.dirname(__FILE__), '..', 'challenges', '**', '*.rb')].each do
 end
 
 RSpec.configure do |config|
-  config.formatter = :progressr
+  config.formatter = :progress
 end
