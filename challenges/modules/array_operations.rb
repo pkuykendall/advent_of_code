@@ -19,4 +19,8 @@ module ArrayOperations
       hsh.sort_by { |_k, v| -v }.to_h
     end
   end
+
+  def middle_value(array)
+    array[(array.length / 2).floor]
+  end
 end
