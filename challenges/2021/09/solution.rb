@@ -1,32 +1,15 @@
 # frozen_string_literal: true
 
-require_relative '../../modules/color_output'
+require_relative '../../classes/grid'
 require 'matrix'
 module Year2021
   class Day09
-    class HeightMap < Array
-      include ColorOutput
+    class HeightMap < Grid
+      self.bfs_eligibility_proc = lambda { |point|
+        return false if point.nil?
 
-      Point = Struct.new(:x, :y, :value, :color) do
-        def north = [x, y - 1]
-
-        def south = [x, y + 1]
-
-        def east = [x + 1, y]
-
-        def west = [x - 1, y]
-
-        def neighbors = [north, south, east, west]
-      end
-
-      def initialize(*several_variants)
-        super
-        each.with_index do |line, y_idx|
-          line.each.with_index do |_value, x_idx|
-            self[y_idx][x_idx] = Point.new(x_idx, y_idx, self[y_idx][x_idx].to_i, GREEN)
-          end
-        end
-      end
+        point.value <= 8
+      }
 
       def find_low_points
         map(&method(:find_local_minima)).flatten
@@ -35,7 +18,9 @@ module Year2021
       def find_basins
         find_low_points.map do |point|
           point.color = COLOR_PICKER.next
-          bfs(point)
+          bfs(point) do |current, visited, queue, starting_point|
+            find_basin_neighbors(current, queue, starting_point, visited)
+          end
         end.reduce(:merge)
       end
 
@@ -61,27 +46,13 @@ module Year2021
 
       private
 
-      # rubocop:disable Metrics/MethodLength
-      def bfs(point)
-        queue   = [point]
-        visited = { point => [] }
-        loop do
-          current = queue.pop
-          eligible_neighbors(current).each do |neighbor|
-            next if visited[point].include? neighbor
+      def find_basin_neighbors(current, queue, starting_point, visited)
+        eligible_neighbors(current, false).each do |neighbor|
+          next if visited[starting_point].include? neighbor
 
-            neighbor.color = current.color
-            visited[point] << neighbor
-            queue << neighbor
-          end
-          break visited if queue.empty?
-        end
-      end
-      # rubocop:enable Metrics/MethodLength
-
-      def eligible_neighbors(point)
-        neighbors_for_point(point).reject do |neighbor|
-          neighbor.nil? || neighbor.value == 9
+          neighbor.color = current.color
+          visited[starting_point] << neighbor
+          queue << neighbor
         end
       end
 
@@ -101,31 +72,19 @@ module Year2021
           neighbor.value <= point.value
         end
       end
-
-      def neighbors_for_point(point)
-        point.neighbors.map { |neighbor_coords| point_at(*neighbor_coords) }
-      end
-
-      def point_at(x_idx, y_idx)
-        return nil if x_idx.negative? || y_idx.negative?
-        return nil if y_idx >= length
-        return nil if x_idx >= self[y_idx].length
-
-        self[y_idx][x_idx]
-      end
     end
 
-    def part_1(input)
+    def part_1(input, print: false)
       height_map = generate_height_map(input)
       low_points = height_map.find_low_points
-      height_map.print_minima_map
+      height_map.print_minima_map if print
       low_points.map { |point| point.value.to_i + 1 }.sum
     end
 
-    def part_2(input)
+    def part_2(input, print: false)
       height_map = generate_height_map(input)
       basins     = height_map.find_basins
-      height_map.print_basin_map
+      height_map.print_basin_map if print
       basins.values.max_by(3, &:count).map(&:count).reduce(:*)
     end
 
@@ -135,6 +94,7 @@ module Year2021
       height_map = input.lines.map do |line|
         line.strip.chars
       end
+
       HeightMap.new(height_map)
     end
   end
