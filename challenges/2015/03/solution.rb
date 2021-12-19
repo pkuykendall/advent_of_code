@@ -26,16 +26,22 @@ module Year2015
       santa_position = Vector[0, 0]
       robot_santa_position = Vector[0, 0]
       house_map[santa_position] = 2
+      update_house_map(house_map, input, santa_position, robot_santa_position)
+      house_map.keys.count
+    end
+
+    private
+
+    def update_house_map(house_map, input, santa_position, robot_santa_position)
       input.strip.each_char.with_index do |char, idx|
         if idx.even?
-          santa_position += DIRECTIONS[char]
+          santa_position            += DIRECTIONS[char]
           house_map[santa_position] += 1
         else
-          robot_santa_position += DIRECTIONS[char]
+          robot_santa_position            += DIRECTIONS[char]
           house_map[robot_santa_position] += 1
         end
       end
-      house_map.keys.count
     end
   end
 end
