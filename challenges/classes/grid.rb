@@ -13,7 +13,7 @@ class Grid < Array
   class Point
     attr_accessor :x_idx, :y_idx, :value, :color
 
-    def initialize(x_idx, y_idx, value, color)
+    def initialize(x_idx, y_idx, value = '.', color = :green)
       @x_idx = x_idx
       @y_idx = y_idx
       @value = value

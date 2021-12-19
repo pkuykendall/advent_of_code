@@ -21,9 +21,9 @@ module Year2021
       def print_grid
         max_x = grid.keys.max
         max_y = grid.values.map(&:keys).flatten.max
-        (0..max_y).each do |y_num|
+        (0...max_y).each do |y_num|
           print "\r\n"
-          (0..max_x).each do |x_num|
+          (0...max_x).each do |x_num|
             print grid.dig(x_num, y_num) || '.'
           end
         end
