@@ -56,6 +56,8 @@ class Grid < Array
     end
   end
 
+  self.point_class = Point
+
   self.bfs_eligibility_proc = lambda { |point|
     return false if point.nil?
 
@@ -121,5 +123,24 @@ class Grid < Array
     return nil if x_idx >= self[y_idx].length
 
     self[y_idx][x_idx]
+  end
+
+  def iterate
+    max_x = count
+    max_y = first.count
+    (0..max_y).each do |y_num|
+      (0...max_x).each do |x_num|
+        yield(x_num, y_num)
+      end
+    end
+  end
+
+  def iterate_points
+    iterate do |x_num, y_num|
+      point = point_at(x_num, y_num)
+      next unless point
+
+      yield(point)
+    end
   end
 end
