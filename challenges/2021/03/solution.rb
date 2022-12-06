@@ -25,7 +25,7 @@ module Year2021
     end
 
     def parse_lines(input)
-      input.lines.map { |line| line.scan /\w/ }
+      input.lines.map { |line| line.scan(/\w/) }
     end
 
     def invert_convert_and_multiply(bin_value)

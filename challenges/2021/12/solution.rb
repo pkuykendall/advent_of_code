@@ -108,7 +108,7 @@ module Year2021
 
           edges[point]&.each do |dest|
             next unless dest.safe_for_travel?
-            next unless can_visit_small_cave?(current_path, dest, limit: limit)
+            next unless can_visit_small_cave?(current_path, dest, limit:)
 
             node_stack << path.new(dest, (current_path + [dest.location]))
           end
