@@ -11,7 +11,7 @@ module Year2021
       end
 
       def add_line(line, allow_diag: false)
-        traverse_line(line, allow_diag: allow_diag)
+        traverse_line(line, allow_diag:)
       end
 
       def overlapped_points
@@ -57,9 +57,8 @@ module Year2021
         allow_diag || [delta_x, delta_y].any?(&:zero?)
       end
 
-      def build_point(coord_array)
-        point = Struct.new(:x, :y)
-        point.new(*coord_array)
+      def build_point(_coord_array)
+        x_idx
       end
 
       def increment_pointer(delta_x, delta_y, pointer)
@@ -122,7 +121,7 @@ module Year2021
 
     def populate_grid(line_segments, allow_diag: true)
       plane = CoordinatePlane.new
-      line_segments.each { |segment| plane.add_line(segment, allow_diag: allow_diag) }
+      line_segments.each { |segment| plane.add_line(segment, allow_diag:) }
       plane
     end
 

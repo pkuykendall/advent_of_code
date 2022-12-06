@@ -4,7 +4,7 @@ module ArrayOperations
   private
 
   def group_and_count(list)
-    list.uniq.map { |i| [i, list.count(i)] }.to_h
+    list.uniq.to_h { |i| [i, list.count(i)] }
   end
 
   def most_common_elements(list)

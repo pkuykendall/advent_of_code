@@ -88,9 +88,9 @@ module Year2020
       passports = input.split(/^\n+/)
       parsed    = passports.map { |passport| passport.split.map!(&:strip) }
       parsed.map do |passport|
-        passport.map do |entry|
+        passport.to_h do |entry|
           entry.split(':')
-        end.to_h
+        end
       end
     end
   end

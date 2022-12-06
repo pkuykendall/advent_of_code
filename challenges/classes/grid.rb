@@ -79,12 +79,12 @@ class Grid < Array
     end
   end
 
-  def each_element(&block)
-    each { |line| line.each(&block) }
+  def each_element(&)
+    each { |line| line.each(&) }
   end
 
-  def map_elements(&block)
-    map { |line| line.map(&block) }
+  def map_elements(&)
+    map { |line| line.map(&) }
   end
 
   private
@@ -100,7 +100,7 @@ class Grid < Array
   end
 
   def eligible_neighbors(point, include_diagonal)
-    neighbors_for_point(point, include_diagonal: include_diagonal).select do |neighbor|
+    neighbors_for_point(point, include_diagonal:).select do |neighbor|
       next false if neighbor.nil?
       next false if self.class.bfs_eligibility_proc.nil?
 
