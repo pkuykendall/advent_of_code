@@ -11,14 +11,28 @@ RSpec.describe Year2021::Day16 do
     EOF
   end
 
+  # let(:example_input_2) do
+  #   <<~EOF
+  #     38006F45291200
+  #   EOF
+  # end
+
   describe 'part 1' do
-    it 'returns 2021 for the example input' do
+    it 'returns 2021 for the example input 1' do
       expect(puzzle.part_1(example_input_1)).to eq(2021)
     end
 
-    it 'returns nil for my input' do
-      expect(puzzle.part_1(input)).to eq(nil)
-    end
+    # it 'returns 2021 for the example input 2' do
+    #   expect(puzzle.part_1(example_input_2)).to eq(2021)
+    # end
+
+    # it 'returns 2021 for the example input' do
+    #   expect(puzzle.part_1(example_input_1)).to eq(2021)
+    # end
+    #
+    # it 'returns nil for my input' do
+    #   expect(puzzle.part_1(input)).to eq(nil)
+    # end
   end
 
   describe 'part 2' do

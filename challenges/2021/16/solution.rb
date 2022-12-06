@@ -6,8 +6,7 @@ module Year2021
       input = input.strip
       bin_str = string_to_binary(input)
       output = parse(bin_str)
-      p output
-      nil
+      output.data.to_i(2)
     end
 
     def part_2(_input)
@@ -21,11 +20,19 @@ module Year2021
     end
 
     def parse(bin_str)
+      parsed_output_class = Struct.new(:version, :type, :data)
+
       version = bin_str[0..2].to_i(2)
       type = bin_str[3..5].to_i(2)
       remainder = bin_str[6..]
 
-      [version, type, remainder]
+      parsed = []
+      remainder.chars.each_slice(5).map do |slice|
+        parsed += slice[1..4]
+        break if slice[0] == '0'
+      end
+
+      parsed_output_class.new(version, type, parsed.join)
     end
   end
 end
