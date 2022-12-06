@@ -57,8 +57,9 @@ module Year2021
         allow_diag || [delta_x, delta_y].any?(&:zero?)
       end
 
-      def build_point(_coord_array)
-        x_idx
+      def build_point(coord_array)
+        point = Struct.new(:x, :y)
+        point.new(*coord_array)
       end
 
       def increment_pointer(delta_x, delta_y, pointer)
