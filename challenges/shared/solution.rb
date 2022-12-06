@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # frozen_string_literal: true %>
 class Solution
   def self.part_1(*input)
