@@ -10,7 +10,7 @@ module Year2022
 
     def part_2
       data.count do |section_1, section_2|
-        smaller, larger = [section_1, section_2].sort_by { |range| range.size }
+        smaller, larger = [section_1, section_2].sort_by(&:size)
         smaller.any? do |element|
           larger.member?(element)
         end
