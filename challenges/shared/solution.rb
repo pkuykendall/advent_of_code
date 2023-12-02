@@ -10,6 +10,7 @@ class Solution
     new(*input).part_2
   end
 
+  # @param [String] input Full challenge input text
   def initialize(input)
     @input = input
   end
@@ -26,10 +27,12 @@ class Solution
 
   private
 
+  # @param [String] line
   def process_input(line)
     line
   end
 
+  # @param [Array<String>] set
   def process_dataset(set)
     set
   end
