@@ -34,7 +34,7 @@ module Year2020
 
     def convert_policy_to_regex(policy)
       count, value = policy.split
-      Regexp.new(/^(?:[^#{value}]*#{value}[^#{value}]*){#{count.tr('-', ',')}}$/)
+      /^(?:[^#{value}]*#{value}[^#{value}]*){#{count.tr('-', ',')}}$/
     end
   end
 end
