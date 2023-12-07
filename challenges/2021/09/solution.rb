@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../classes/grid'
+require_relative '../../classes/grid/base_grid'
 require 'matrix'
 module Year2021
   class Day09
-    class HeightMap < Grid
+    class HeightMap < Grid::BaseGrid
+      include BreadthFirstSearchable
+
       self.bfs_eligibility_proc = lambda { |point|
         return false if point.nil?
 
@@ -47,7 +49,7 @@ module Year2021
       private
 
       def find_basin_neighbors(current, queue, starting_point, visited)
-        eligible_neighbors(current, false).each do |neighbor|
+        bfs_eligible_neighbors(current, false).each do |neighbor|
           next if visited[starting_point].include? neighbor
 
           neighbor.color = current.color
