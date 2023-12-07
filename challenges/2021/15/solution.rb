@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative '../../classes/grid'
+require_relative '../../classes/grid/base_grid'
 
 module Year2021
   class Day15
-    class DijkstraGrid < Grid
+    class DijkstraGrid < Grid::BaseGrid
       INFINITY = 1 << 64
       attr_reader :graph, :nodes
 

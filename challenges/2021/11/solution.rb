@@ -2,7 +2,8 @@
 
 module Year2021
   class Day11
-    class Octomap < Grid
+    class Octomap < Grid::BaseGrid
+      include BreadthFirstSearchable
       class Octopus < Grid::Point
         attr_accessor :flashed, :flash_count
 
@@ -80,7 +81,7 @@ module Year2021
       def find_neighbors(current, queue)
         return unless current.just_flashed?
 
-        eligible_neighbors(current, true).each do |neighbor|
+        bfs_eligible_neighbors(current, true).each do |neighbor|
           neighbor.increment
           queue << neighbor
         end
