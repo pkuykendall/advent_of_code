@@ -7,3 +7,5 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gem 'aoc_rb'
 gem 'matrix'
 gem 'rubocop', group: %i[development test]
+
+gem "ostruct", "~> 0.6.3"
