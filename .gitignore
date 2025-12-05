@@ -236,3 +236,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
+# Protected content
+challenges/**/part_1.md
+challenges/**/part_2.md
+challenges/**/input.txt
